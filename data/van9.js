@@ -20,7 +20,7 @@ window.HOC_LIEU = {
   /* Khóa của mỗi môn có dạng "khối-môn", ví dụ "9-Ngữ văn" */
   baiHoc: {
     "9-Ngữ văn": [
-      { tuan: "4", chuyende: "Tiếng Việt", ten: "Ôn tập phương thức biểu đạt", mota: "", video: "", taiLieu: "", baiGiang: "", phieu: "" },
+      { tuan: "4", chuyende: "Tiếng Việt", ten: "Ôn tập phương thức biểu đạt", mota: "", video: "", taiLieu: "https://drive.google.com/file/d/1mt9DWJ_MCabf0BHFP3vKV-lAryeb03oy/view?usp=drive_link", baiGiang: "", phieu: "" },
       { tuan: "5", chuyende: "Tiếng Việt", ten: "Ôn tập biện pháp tu từ" },
       { tuan: "6", chuyende: "Tiếng Việt", ten: "Luyện tập xác định phương thức biểu đạt, biện pháp tu từ" },
       { tuan: "7", chuyende: "Truyện", ten: "Truyện truyền kì, truyện trinh thám, truyện ngắn hiện đại" },
