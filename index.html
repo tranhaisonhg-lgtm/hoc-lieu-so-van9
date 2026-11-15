@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Học liệu số Ngữ văn 9</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <button id="btnMenu" class="icon" aria-label="Mở menu khối và môn">☰</button>
+  <a class="brand" href="#" data-go="home"><span class="logo">văn</span><span class="name">Học liệu số<small>Ngữ văn 9</small></span></a>
+  <nav aria-label="Điều hướng chính">
+    <button data-go="home">Trang chủ</button>
+    <button data-go="hoc">Học liệu số</button>
+    <button data-go="on">Ôn thi vào lớp 10</button>
+    <button data-go="tienich">Tiện ích</button>
+  </nav>
+  <button id="btnTheme" class="icon" aria-label="Đổi giao diện sáng hoặc tối">◐</button>
+</header>
+
+<div class="app">
+  <aside id="side" aria-label="Chọn khối và môn"></aside>
+  <section class="list" aria-label="Danh sách bài học">
+    <div class="tools">
+      <input id="q" type="search" placeholder="Tìm bài học" aria-label="Tìm bài học">
+      <select id="cd" aria-label="Lọc theo chuyên đề"></select>
+    </div>
+    <ul id="items"></ul>
+  </section>
+  <main id="detail"></main>
+</div>
+
+<footer id="foot"></footer>
+<div id="toast" role="status"></div>
+
+<dialog id="qrDlg">
+  <h2>Tạo mã QR</h2>
+  <label>Đường link<input id="qrUrl" type="url" placeholder="https://"></label>
+  <label>Logo ở giữa (không bắt buộc)<input id="qrLogo" type="file" accept="image/*"></label>
+  <div class="acts"><button class="btn" id="qrMake">Tạo mã QR</button><button class="btn" id="qrDown" hidden>Tải ảnh PNG</button><button class="btn quiet" id="qrClose">Đóng</button></div>
+  <div id="qrOut"></div>
+</dialog>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="data/van9.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
