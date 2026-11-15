@@ -12,6 +12,7 @@
   let mon = MAC_DINH, cur = -1, tab = 0, logo = null, anhQR = null;
   const xem = new Set(LS.get("daxem", []));
   const bai = () => D.baiHoc[mon] || [];
+  const mauCD = cd => "var(--c" + ([...new Set(bai().map(b => b.chuyende))].indexOf(cd) % 8) + ")";
   const mobile = () => matchMedia("(max-width:900px)").matches;
 
   /* Chuyển link YouTube / Drive / Docs thành link nhúng. Canva và link khác: chỉ có nút mở. */
@@ -40,17 +41,17 @@
     const ds = arr.map((b, i) => ({ b, i })).filter(({ b }) => (!cd || b.chuyende === cd) && (!q || bo(b.ten + " " + (b.mota || "") + " " + b.chuyende).includes(q)));
     $("#items").innerHTML = !arr.length ? '<li class="empty">Môn này đang cập nhật.</li>' :
       !ds.length ? '<li class="empty">Không tìm thấy bài phù hợp.</li>' :
-      ds.map(({ b, i }) => `<li><button data-i="${i}" class="${i === cur ? "on" : ""}"><span class="tuan">Tuần ${esc(b.tuan)}</span><strong>${esc(b.ten)}</strong><small>${esc(b.chuyende)}</small>${xem.has(mon + i) ? '<i class="ok" title="Đã xem">✓</i>' : ""}</button></li>`).join("");
+      ds.map(({ b, i }) => `<li><button data-i="${i}" style="--c:${mauCD(b.chuyende)}" class="${i === cur ? "on" : ""}"><span class="tuan">Tuần ${esc(b.tuan)}</span><strong>${esc(b.ten)}</strong><small>${esc(b.chuyende)}</small>${xem.has(mon + i) ? '<i class="ok" title="Đã xem">✓</i>' : ""}</button></li>`).join("");
   }
   function veChiTiet() {
     const d = $("#detail"), b = bai()[cur];
-    if (!b) { d.innerHTML = '<div class="hello"><h2>Chọn một bài học</h2><p>Mỗi bài có video, tài liệu, bài giảng và phiếu học tập. Hãy chọn bài trong danh sách.</p></div>'; return; }
+    if (!b) { d.innerHTML = '<div class="hello"><h2>Chọn một bài học</h2><p>Mỗi bài có 4 loại học liệu. Hãy chọn bài trong danh sách.</p><div class="loai"><span style="--t:var(--t0)">Video</span><span style="--t:var(--t1)">Tài liệu</span><span style="--t:var(--t2)">Bài giảng</span><span style="--t:var(--t3)">Phiếu học tập</span></div></div>'; return; }
     const k = TABS[tab][0], u = (b[k] || "").trim(), e = u && nhung(u);
-    d.innerHTML = `<h2>${esc(b.ten)}</h2><p class="meta">Tuần ${esc(b.tuan)}, chuyên đề ${esc(b.chuyende)}</p>${b.mota ? `<p>${esc(b.mota)}</p>` : ""}` +
-      `<div class="tabs" role="tablist">${TABS.map(([key, n], j) => `<button role="tab" data-tab="${j}" aria-selected="${j === tab}" class="${j === tab ? "on" : ""}">${n}${b[key] ? '<i class="dot"></i>' : ""}</button>`).join("")}</div>` +
+    d.innerHTML = `<div class="hd" style="--c:${mauCD(b.chuyende)}"><h2>${esc(b.ten)}</h2><p class="meta">Tuần ${esc(b.tuan)}, chuyên đề ${esc(b.chuyende)}</p></div>${b.mota ? `<p>${esc(b.mota)}</p>` : ""}` +
+      `<div class="tabs" role="tablist">${TABS.map(([key, n], j) => `<button role="tab" style="--t:var(--t${j})" data-tab="${j}" aria-selected="${j === tab}" class="${j === tab ? "on" : ""}">${n}${b[key] ? '<i class="dot"></i>' : ""}</button>`).join("")}</div>` +
       `<div class="view">${!u ? '<p class="empty">Chưa có học liệu.</p>' : (e ? `<iframe class="${e[0]}" src="${e[1]}" title="${TABS[tab][1]}" allowfullscreen loading="lazy"></iframe>` : "")}` +
-      `${u ? `<a class="btn" href="${esc(u)}" target="_blank" rel="noopener">Mở trong tab mới</a>` : ""}</div>` +
-      `<div class="acts"><button class="btn quiet" id="bQR">Tạo mã QR</button><button class="btn quiet" id="bCopy">Sao chép link</button></div>`;
+      `${u ? `<a class="btn b-xanh" href="${esc(u)}" target="_blank" rel="noopener">Mở trong tab mới</a>` : ""}</div>` +
+      `<div class="acts"><button class="btn b-luc" id="bQR">Tạo mã QR</button><button class="btn b-cam" id="bCopy">Sao chép link</button></div>`;
   }
   function chon(i, cuon) {
     cur = i; tab = 0; xem.add(mon + i); LS.set("daxem", [...xem]);
